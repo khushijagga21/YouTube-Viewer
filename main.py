@@ -101,7 +101,7 @@ def open_instagram_viewer():
 class YouTubeViewBotUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("🔥 PRIME FEED")
+        self.root.title("🔥 AutoStreamX")
         self.root.geometry("600x650")
         self.root.configure(bg="#1e1e2f")
 
@@ -116,7 +116,7 @@ class YouTubeViewBotUI:
         label_font = ("Segoe UI", 11)
         entry_font = ("Segoe UI", 10)
 
-        tk.Label(root, text="🎥 Prime Feed", font=heading_font, bg="#1e1e2f", fg="#00ffcc").pack(pady=15)
+        tk.Label(root, text="🎥 AutoStreamX", font=heading_font, bg="#1e1e2f", fg="#00ffcc").pack(pady=15)
         tk.Label(root, text="Video URL:", font=label_font, bg="#1e1e2f", fg="#ffffff").pack()
         tk.Entry(root, textvariable=self.url, font=entry_font, width=50, bg="#2c2c3c", fg="white", bd=1, insertbackground='white').pack(pady=5)
 
