@@ -82,7 +82,7 @@ def open_instagram_viewer():
         if not url.startswith("https://www.instagram.com/reel/"):
             messagebox.showerror("Invalid URL", "Please enter a valid Instagram Reel URL.")
             return
-        play_instagram_reel(url)  # ✅ run on main thread now
+        play_instagram_reel(url)
 
     tk.Button(ig_window, text="▶ Play Reel", command=play_reel, font=("Segoe UI", 10), bg="#00cec9", fg="white", width=20).pack(pady=10)
     tk.Button(ig_window, text="🔐 Login (once)", command=login_once, font=("Segoe UI", 10), bg="#0984e3", fg="white", width=20).pack(pady=5)
@@ -91,11 +91,12 @@ def open_instagram_viewer():
 class YouTubeViewBotUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("🔁 YouTube Viewer Bot")
-        self.root.geometry("600x500")
+        self.root.title("📹 YouTube & Reels Viewer")
+        self.root.geometry("600x550")
         self.root.configure(bg="#1e1e2f")
 
         self.url = tk.StringVar()
+        self.keywords = tk.StringVar()
         self.proxy_file_path = ""
         self.loop_minutes = tk.StringVar(value="0")
 
@@ -106,6 +107,10 @@ class YouTubeViewBotUI:
         tk.Label(root, text="🎬 YouTube Viewer Bot", font=heading_font, bg="#1e1e2f", fg="#00ffcc").pack(pady=15)
         tk.Label(root, text="Video URL:", font=label_font, bg="#1e1e2f", fg="#ffffff").pack()
         tk.Entry(root, textvariable=self.url, font=entry_font, width=50, bg="#2c2c3c", fg="white", bd=1, insertbackground='white').pack(pady=5)
+
+        # ➕ New Keyword Field
+        tk.Label(root, text="Keywords (optional):", font=label_font, bg="#1e1e2f", fg="#ffffff").pack()
+        tk.Entry(root, textvariable=self.keywords, font=entry_font, width=50, bg="#2c2c3c", fg="white", bd=1, insertbackground='white').pack(pady=5)
 
         tk.Button(root, text="📂 Choose Proxy File", command=self.select_proxy_file, font=label_font, bg="#00b894", fg="white", width=20).pack(pady=15)
 
