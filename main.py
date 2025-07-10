@@ -11,6 +11,7 @@ import random
 import undetected_chromedriver as uc
 
 COOKIE_FILE = 'instagram_cookies.pkl'
+MASTER_PASSWORD = "letmein123"  # Fixed login password
 
 
 def is_proxy_working(proxy):
@@ -101,7 +102,7 @@ def open_instagram_viewer():
 class YouTubeViewBotUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("🔥 AutoStreamX")
+        self.root.title("🔥 Auto feed x")
         self.root.geometry("600x650")
         self.root.configure(bg="#1e1e2f")
 
@@ -116,7 +117,7 @@ class YouTubeViewBotUI:
         label_font = ("Segoe UI", 11)
         entry_font = ("Segoe UI", 10)
 
-        tk.Label(root, text="🎥 AutoStreamX", font=heading_font, bg="#1e1e2f", fg="#00ffcc").pack(pady=15)
+        tk.Label(root, text="🎥 Auto feed x", font=heading_font, bg="#1e1e2f", fg="#00ffcc").pack(pady=15)
         tk.Label(root, text="Video URL:", font=label_font, bg="#1e1e2f", fg="#ffffff").pack()
         tk.Entry(root, textvariable=self.url, font=entry_font, width=50, bg="#2c2c3c", fg="white", bd=1, insertbackground='white').pack(pady=5)
 
@@ -236,7 +237,29 @@ class YouTubeViewBotUI:
             messagebox.showerror("Error", f"Failed to save keywords: {e}")
 
 
+def show_login_window():
+    login = tk.Tk()
+    login.title("Login Required")
+    login.geometry("300x180")
+    login.configure(bg="#1e1e2f")
+
+    tk.Label(login, text="🔐 Enter Password:", bg="#1e1e2f", fg="white", font=("Segoe UI", 11)).pack(pady=20)
+    password_var = tk.StringVar()
+    tk.Entry(login, textvariable=password_var, show="*", width=25, font=("Segoe UI", 10), bg="#2c2c3c", fg="white", bd=1).pack()
+
+    def check_password():
+        if password_var.get() == MASTER_PASSWORD:
+            login.destroy()
+            root = tk.Tk()
+            app = YouTubeViewBotUI(root)
+            root.mainloop()
+        else:
+            messagebox.showerror("Access Denied", "Incorrect password!")
+
+    tk.Button(login, text="Login", command=check_password, bg="#6c5ce7", fg="white", width=15).pack(pady=15)
+
+    login.mainloop()
+
+
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = YouTubeViewBotUI(root)
-    root.mainloop()
+    show_login_window()
